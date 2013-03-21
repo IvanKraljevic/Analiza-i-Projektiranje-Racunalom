@@ -1,13 +1,21 @@
 package hr.fer.zemris.apr.lab3;
 
-import hr.fer.zemris.apr.lab2.F3;
-import hr.fer.zemris.apr.lab2.F4;
-import hr.fer.zemris.apr.lab2.Function;
+import hr.fer.zemris.apr.utilities.F3;
+import hr.fer.zemris.apr.utilities.F4;
+import hr.fer.zemris.apr.utilities.F6;
+import hr.fer.zemris.apr.utilities.F7;
+import hr.fer.zemris.apr.utilities.Function;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Glavni program
+ * 
+ * @author Ivan
+ * 
+ */
 public class Main {
 	private BufferedReader reader;
 	private Function function;

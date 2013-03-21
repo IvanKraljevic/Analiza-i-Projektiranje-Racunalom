@@ -1,4 +1,4 @@
-package hr.fer.zemris.apr.lab2;
+package hr.fer.zemris.apr.utilities;
 
 public class F3 implements Function {
 	public double[] parameters;

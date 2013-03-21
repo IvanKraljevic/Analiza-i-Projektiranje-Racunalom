@@ -1,5 +1,7 @@
 package hr.fer.zemris.apr.lab2;
 
+import hr.fer.zemris.apr.utilities.Function;
+
 import java.util.Arrays;
 
 public class HookeJeves extends OptimizingMethod {

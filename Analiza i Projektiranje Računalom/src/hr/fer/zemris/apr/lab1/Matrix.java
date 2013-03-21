@@ -43,8 +43,15 @@ public class Matrix {
 		setElements(new double[rows][columns]);
 	}
 
-	// Statičke metode
+	// Static methods
 
+	/**
+	 * Metoda stvara kvadratnu jediničnu matricu dimenzija {@code n}.
+	 * 
+	 * @param n
+	 *            dimenzija kvadratne matrice
+	 * @return jedinična matrica
+	 */
 	public static Matrix ones(int n) {
 		Matrix m = new Matrix(n, n);
 		for (int i = 0; i < n; i++) {
@@ -53,16 +60,29 @@ public class Matrix {
 		return m;
 	}
 
+	/**
+	 * Metoda stvara kvadratnu nul matricu dimenzija {@code n}
+	 * 
+	 * @param n
+	 *            dimenzija kvadratne matrice
+	 * @return nul matrica
+	 */
 	public static Matrix zeros(int n) {
 		Matrix m = new Matrix(n, n);
 		return m;
 	}
 
+	/**
+	 * Konstruktor koji učitava vrijednosti matrice iz datoteke.
+	 * 
+	 * @param path
+	 *            putanja do datoteke sa matricom
+	 */
 	public Matrix(String path) {
 		importMatrixFromFile(path);
 	}
 
-	// INICIJALIZACIJA, ISPIS, MATEMATIČKE OPERACIJE
+	// Initialization, print and basic math methods
 
 	/***
 	 * Metoda koja dinamički mijenja veličinu matrice.
@@ -123,7 +143,7 @@ public class Matrix {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("Greška pri čitanju ulazne datoteke.");
+			System.out.println("ERROR: Greška pri čitanju ulazne datoteke.");
 		} finally {
 			try {
 				reader.close();
@@ -152,21 +172,27 @@ public class Matrix {
 			writer.println();
 			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println("Greška pri ispisu matrice.");
+			System.out.println("ERROR: Greška pri ispisu matrice.");
 			} finally {
 				try {
 					writer.flush();
-				// writer.close();
-			} catch (NullPointerException e) {
+					writer.close();
+				} catch (NullPointerException e) {
 					e.printStackTrace();
-				}
 			}
+		}
 	}
 
+	/**
+	 * Metoda računa inverz matrice. Prvo se vrši LUP dekompozicija matrice, a
+	 * zatim n puta se vrši supstitucija unaprijed i unatrag.
+	 * 
+	 * @return inverz matrice
+	 */
 	public Matrix inverse() {
 		if (numberOfRows != numberOfColumns) {
 			System.out
-					.println("GREŠKA: Ne mogu obaviti inverz jer broj stupaca != broj redaka");
+					.println("ERROR: Ne mogu obaviti inverz jer broj stupaca != broj redaka");
 			throw new MatrixMathError();
 		}
 		Matrix inverse = new Matrix(numberOfColumns, numberOfRows);
@@ -194,7 +220,7 @@ public class Matrix {
 		// a += m
 		if (m.getNumberOfRows() != numberOfRows
 				|| m.getNumberOfColumns() != numberOfColumns) {
-			System.out.println("GREŠKA: Dimenzije matrica ne odgovaraju.");
+			System.out.println("ERROR: Dimenzije matrica ne odgovaraju.");
 			throw new MatrixMathError();
 		}
 		for (int i = 0; i < numberOfRows; i++) {
@@ -216,7 +242,7 @@ public class Matrix {
 	public Matrix add(Matrix m) {
 		if (m.getNumberOfRows() != numberOfRows
 				|| m.getNumberOfColumns() != numberOfColumns) {
-			System.out.println("GREŠKA: Dimenzije matrica ne odgovaraju.");
+			System.out.println("ERROR: Dimenzije matrica ne odgovaraju.");
 			throw new MatrixMathError();
 		}
 		Matrix b = new Matrix(numberOfRows, numberOfColumns);
@@ -225,7 +251,6 @@ public class Matrix {
 				b.setElement(i, j, elements[i][j] + m.getElement(i, j));
 			}
 		}
-
 		return b;
 	}
 
@@ -239,7 +264,7 @@ public class Matrix {
 	public void substractFrom(Matrix m) {
 		if (m.getNumberOfRows() != numberOfRows
 				|| m.getNumberOfColumns() != numberOfColumns) {
-			System.out.println("GREŠKA: Dimenzije matrica ne odgovaraju.");
+			System.out.println("ERROR: Dimenzije matrica ne odgovaraju.");
 			throw new MatrixMathError();
 		}
 		for (int i = 0; i < numberOfRows; i++) {
@@ -283,7 +308,7 @@ public class Matrix {
 	public Matrix multiply(Matrix m) {
 		// return a * m
 		if (numberOfColumns != m.getNumberOfRows()) {
-			System.out.println("GREŠKA: Dimenzije matrica ne odgovaraju.");
+			System.out.println("ERROR: Dimenzije matrica ne odgovaraju.");
 			throw new MatrixMathError();
 		}
 
@@ -322,9 +347,10 @@ public class Matrix {
 	}
 
 	/**
-	 * Množimo trenutnu matricu sa skalarom.
+	 * Množimo trenutnu matricu skalarom.
 	 * 
 	 * @param scalar
+	 *            skalar s kojim se množi matrica
 	 */
 	public void multiplyScalar(double scalar) {
 		for (int i = 0; i < numberOfRows; i++) {
@@ -354,8 +380,8 @@ public class Matrix {
 	 * Supstitucija unaprijed.
 	 * 
 	 * @param b
-	 *            slobodni vektor sa desne strane.
-	 * @return vektor y
+	 *            slobodni vektor desne strane jednadžbe
+	 * @return vektor y rješenje sustava L*y=b
 	 */
 	public Matrix forwardSupstitution(Matrix b) {
 		Matrix m = this.clone();
@@ -366,7 +392,6 @@ public class Matrix {
 				bRow[j] -= m.getElement(j, i) * bRow[i];
 			}
 		}
-
 		m.setNumberOfRows(1);
 		m.setElements(new double[1][m.getNumberOfColumns()]);
 		m.setRow(0, bRow);
@@ -386,7 +411,7 @@ public class Matrix {
 		double[] bRow = y.getRow(0);
 		for (int i = numberOfColumns - 1; i >= 0; i--) {
 			if (Math.abs(this.getElement(i, i)) < EPSILON) {
-				System.out.println("GREŠKA: Stožerni element je ~0.");
+				System.out.println("ERROR: Stožerni element je ~0.");
 				throw new MatrixMathError();
 			}
 			bRow[i] /= m.getElement(i, i);
@@ -413,7 +438,7 @@ public class Matrix {
 			for (int j = i + 1; j < numberOfRows; j++) {
 				if (Math.abs(elements[i][i]) <= EPSILON) {
 					elements = m.getElements();
-					System.out.println("GREŠKA: Stožerni element je ~0.");
+					System.out.println("ERROR: Stožerni element je ~0.");
 					throw new MatrixMathError();
 				}
 				elements[j][i] /= elements[i][i];
@@ -425,7 +450,7 @@ public class Matrix {
 		if (Math.abs(elements[numberOfRows - 1][numberOfColumns - 1]) <= EPSILON) {
 			// u slučaju da je posljednji element ~0
 			elements = m.getElements(); // vraćamo matricu u početno stanje
-			System.out.println("GREŠKA: Stožerni element je ~0.");
+			System.out.println("ERROR: Stožerni element je ~0.");
 			throw new MatrixMathError();
 		}
 	}
@@ -456,7 +481,7 @@ public class Matrix {
 			if (Math.abs(elements[pivot][i]) < EPSILON) {
 				System.out.println(this.toString());
 				elements = m.getElements(); // vraćamo matricu u početno stanje
-				System.out.println("GREŠKA: Stožerni element je ~0."
+				System.out.println("ERROR: Stožerni element je ~0."
 						+ elements[pivot][i]);
 				throw new MatrixMathError();
 			}
@@ -477,13 +502,13 @@ public class Matrix {
 		if (Math.abs(elements[numberOfRows - 1][numberOfColumns - 1]) <= EPSILON) {
 			// u slučaju da je posljednji element ~0
 			elements = m.getElements(); // vraćamo matricu u početno stanje
-			System.out.println("GREŠKA: Stožerni element je ~0.");
+			System.out.println("ERROR: Stožerni element je ~0.");
 			throw new MatrixMathError();
 		}
 		return p;
 	}
 
-	// GETTERI, SETTERI, UTILLITY
+	// Getters, setters, utility methods
 
 	public int getNumberOfRows() {
 		return numberOfRows;

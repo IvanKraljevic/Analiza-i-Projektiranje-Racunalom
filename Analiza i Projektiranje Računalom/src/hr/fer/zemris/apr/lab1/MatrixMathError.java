@@ -1,5 +1,13 @@
 package hr.fer.zemris.apr.lab1;
 
+/**
+ * Iznimka se baca u slučajevima kada neku matematičku operaciju nije moguće
+ * izvršiti nad matricom (npr. pokušaj LUP dekompozicije nad singularnom
+ * matricom).
+ * 
+ * @author Ivan
+ * 
+ */
 public class MatrixMathError extends RuntimeException {
 
 	/**

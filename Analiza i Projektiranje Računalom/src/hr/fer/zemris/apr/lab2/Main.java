@@ -1,5 +1,11 @@
 package hr.fer.zemris.apr.lab2;
 
+import hr.fer.zemris.apr.utilities.F1;
+import hr.fer.zemris.apr.utilities.F2;
+import hr.fer.zemris.apr.utilities.F3;
+import hr.fer.zemris.apr.utilities.F4;
+import hr.fer.zemris.apr.utilities.Function;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

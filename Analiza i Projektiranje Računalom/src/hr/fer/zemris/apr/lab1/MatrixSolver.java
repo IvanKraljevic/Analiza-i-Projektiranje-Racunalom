@@ -2,7 +2,16 @@ package hr.fer.zemris.apr.lab1;
 
 import java.io.PrintStream;
 
+/**
+ * Klasa koja rješava sustav linearnih jednadžbi A*x=b. Matrica A se nalazi u
+ * datoteci {@code matrixPath}, a matrica b u datoteci {@code vectorPath}.
+ * Rješenje sustava se ispisuje na {@code output}.
+ * 
+ * @author Ivan
+ * 
+ */
 public class MatrixSolver {
+
 	public static void solve(String matrixPath, String vectorPath,
 			PrintStream output) {
 		Matrix a = new Matrix(1, 1);

@@ -1,4 +1,4 @@
-package hr.fer.zemris.apr.lab2;
+package hr.fer.zemris.apr.utilities;
 
 public class F2 implements Function {
 	private String functionString = "f2(x,y) = (x-4)^2 + 4(y-2)^2";

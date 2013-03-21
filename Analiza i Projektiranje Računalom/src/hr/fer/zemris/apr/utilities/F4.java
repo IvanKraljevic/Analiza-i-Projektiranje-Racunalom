@@ -1,4 +1,4 @@
-package hr.fer.zemris.apr.lab2;
+package hr.fer.zemris.apr.utilities;
 
 public class F4 implements Function {
 	private String functionString = "f4(x,y) = |(x-y)*(x+y)|+(x^2+y^2)^0.5";

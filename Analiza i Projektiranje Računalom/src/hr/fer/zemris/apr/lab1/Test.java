@@ -1,6 +1,12 @@
 package hr.fer.zemris.apr.lab1;
 
 
+/**
+ * Samo za testiranje...
+ * 
+ * @author Ivan
+ * 
+ */
 public class Test {
 	public static void main(String[] args) {
 		String path = "matrix.txt";

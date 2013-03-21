@@ -1,6 +1,5 @@
-package hr.fer.zemris.apr.lab3;
+package hr.fer.zemris.apr.utilities;
 
-import hr.fer.zemris.apr.lab2.Function;
 
 public class F6 implements Function {
 	@Override

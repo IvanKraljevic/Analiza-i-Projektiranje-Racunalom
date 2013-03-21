@@ -1,6 +1,6 @@
 package hr.fer.zemris.apr.lab3;
 
-import hr.fer.zemris.apr.lab2.Function;
+import hr.fer.zemris.apr.utilities.Function;
 
 import java.util.ArrayList;
 import java.util.Arrays;
