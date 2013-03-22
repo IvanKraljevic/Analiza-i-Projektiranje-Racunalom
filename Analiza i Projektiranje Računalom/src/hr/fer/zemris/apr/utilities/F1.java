@@ -1,7 +1,8 @@
 package hr.fer.zemris.apr.utilities;
 
 public class F1 implements Function {
-	String functionString = "f1(x,y) = 10*(x^2-y)^2+(1-x)^2";
+	private String functionString = "f1(x,y) = 10*(x^2-y)^2+(1-x)^2";
+
 	@Override
 	public double getValue(double[] x) {
 
